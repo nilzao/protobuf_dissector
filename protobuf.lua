@@ -76,9 +76,10 @@ local decoder_table = Compiler:compile(proto_files)
 
 -- register global dissector string table
 local protobuf_table = DissectorTable.new("protobuf.message", "Protobuf Message", ftypes.STRING)
-for name, object in pairs(decoder_table) do
-	dprint("Register", name, "protobuf message")
-	protobuf_table:add(name, object['proto'])
+for _, object in pairs(decoder_table) do
+	local proto = object['proto']
+	dprint("Register", proto.name, "protobuf message")
+	protobuf_table:add(proto.name, proto)
 end
 
 -- disable loading of our modules
