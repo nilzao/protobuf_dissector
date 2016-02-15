@@ -74,5 +74,12 @@ dprint2(#proto_files,"proto files being compiled")
 -- compile the proto files
 local decoder_table = Compiler:compile(proto_files)
 
+-- register global dissector string table
+local protobuf_table = DissectorTable.new("protobuf.message", "Protobuf Message", ftypes.STRING)
+for name, object in pairs(decoder_table) do
+	dprint("Register", name, "protobuf message")
+	protobuf_table:add(name, object['proto'])
+end
+
 -- disable loading of our modules
 _G['protbuf_dissector'] = nil
