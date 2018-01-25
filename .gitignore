@@ -39,3 +39,8 @@ cscope.*
 *.sw*
 *~
 BROWSE
+
+#eclipse stuff
+.project
+.buildpath
+.settings/
